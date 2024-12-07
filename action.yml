@@ -1,0 +1,50 @@
+name: Tag Action Release
+description: placeholder
+branding:
+  icon: arrow-right-circle
+  color: gray-dark
+
+runs:
+  using: composite
+  steps:
+    - name: Get Tags
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: |
+          ${{ github.repository }}
+        tags: |
+          type=semver,pattern=v{{major}}
+          type=semver,pattern=v{{major}}.{{minor}}
+
+    - name: Exit if No Tags
+      if: ${{ ! steps.meta.outputs.tags }}
+      shell: bash
+      run: |
+        echo '::error:: "${{ github.ref_name }}" is not a valid semver tag.'
+        exit 1
+
+    - name: Set Up uv
+      uses: astral-sh/setup-uv@v3
+
+    - name: Set Tags
+      shell: uv run --with github-action-utils python {0}
+      # language=python
+      run: |
+        import os
+        import json
+        import subprocess
+        
+        import github_action_utils as gha
+          
+        docker_output = json.loads(os.getenv("DOCKER_METADATA_OUTPUT_JSON"))
+        git_tags = [tag.split(":")[-1] for tag in docker_output["tags"]]
+        
+        for tag in git_tags:
+          subprocess.run(["git", "tag", "-f", tag])
+
+    - name: Push Tag
+      shell: bash
+      run: git push -f --tags origin HEAD:${{ github.event.repository.default_branch }}
+        
+          
