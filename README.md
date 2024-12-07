@@ -1,8 +1,10 @@
 # celsiusnarhwal/tag-action-release
 
 Whenever you push a semver tag, this GitHub Action will automatically tag the associated commit with the matching major
-and minor versions. For example, if you publish a release tagged`v1.2.3`, this action will apply the `v1` and `v1.2` 
+and minor versions. For example, if you publish a release tagged `v1.2.3`, this action will apply the `v1` and `v1.2` 
 tags to the associated commit.
+
+This action is intended for use in the releasing of other actions, but there's nothing forcing you to use it that way.
 
 Tags must begin with a lowercase `v`.
 
