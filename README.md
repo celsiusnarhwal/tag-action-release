@@ -1,6 +1,6 @@
 # celsiusnarhwal/tag-action-release
 
-Whenever you push a semver tag, this GitHub Action will automatically tag the associated commit with the matching major
+Whenever you push a [semver](https://semver.org) tag, this GitHub Action will automatically tag the associated commit with the matching major
 and minor versions. For example, if you push the tag `v1.2.3`, this action will apply the `v1` and `v1.2` 
 tags to the associated commit.
 
