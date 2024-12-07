@@ -24,11 +24,11 @@ runs:
         echo '::error:: "${{ github.ref_name }}" is not a valid semver tag.'
         exit 1
 
-    - name: Set Up uv
-      uses: astral-sh/setup-uv@v3
+    - name: Set Up Python
+      uses: astral-sh/setup-python@v5
 
     - name: Set Tags
-      shell: uv run python {0}
+      shell: python
       # language=python
       run: |
         import os
