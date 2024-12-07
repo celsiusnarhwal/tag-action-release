@@ -28,14 +28,12 @@ runs:
       uses: astral-sh/setup-uv@v3
 
     - name: Set Tags
-      shell: uv run --with github-action-utils python {0}
+      shell: uv run python {0}
       # language=python
       run: |
         import os
         import json
         import subprocess
-        
-        import github_action_utils as gha
           
         docker_output = json.loads(os.getenv("DOCKER_METADATA_OUTPUT_JSON"))
         git_tags = [tag.split(":")[-1] for tag in docker_output["tags"]]
