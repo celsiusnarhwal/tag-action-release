@@ -38,7 +38,7 @@ runs:
         for tag in git_tags:
           subprocess.run(["git", "tag", "-f", tag])
 
-    - name: Push Tag
+    - name: Push Tags
       shell: bash
       run: git push -f --tags origin HEAD:${{ github.event.repository.default_branch }}
         
