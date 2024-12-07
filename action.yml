@@ -24,9 +24,6 @@ runs:
         echo '::error:: "${{ github.ref_name }}" is not a valid semver tag.'
         exit 1
 
-    - name: Set Up Python
-      uses: actions/setup-python@v5
-
     - name: Set Tags
       shell: python
       # language=python
