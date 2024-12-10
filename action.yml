@@ -16,6 +16,8 @@ runs:
         tags: |
           type=semver,pattern=v{{major}}
           type=semver,pattern=v{{major}}.{{minor}}
+        flavor: |
+          latest=false
 
     - name: Exit if No Tags
       if: ${{ ! steps.meta.outputs.tags }}
